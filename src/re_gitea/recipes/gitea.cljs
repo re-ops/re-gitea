@@ -7,26 +7,27 @@
    [re-conf.core :refer (map*)]
    [re-conf.resources.pkg :refer (package)]
    [re-conf.resources.user :refer (user)]
-   [re-conf.resources.file :refer (chmod)]
+   [re-conf.resources.file :refer (chmod directory)]
    [re-conf.resources.download :refer (download)]))
 
 (defn gitea
-   "Installing gitea"
-   []
-   (->
-     (let [url "https://dl.gitea.io/gitea/1.5.0/gitea-1.5.0-linux-amd64"
-           dest "/usr/local/bin/gitea"]
-       (package "git")
-       (download url dest)
-       (map* directory (map (partial str "/var/lib/gitea/") ["custom" "data" "indexers" "public" "log"]))
-       (chmod dest "0777")
-       (summary "gitea setup")
-       )))
+  "Installing gitea"
+  []
+  (let [url "https://dl.gitea.io/gitea/1.5.0/gitea-1.5.0-linux-amd64"
+        dest "/usr/local/bin/gitea"
+        parent "/var/lib/gitea/"
+        folders (map (fn [f] (vector (<< "~{parent}~{f}"))) ["custom" "data" "indexers" "public" "log"])]
+    (->
+     (package "git")
+     (download url dest)
+     (directory parent :present)
+     (map* directory folders)
+     (chmod dest "0777")
+     (summary "gitea setup"))))
 
 (defn git-user
-   "gitea user"
-   []
-   (->
-     (user "git" {:system true})
-     )
-  )
+  "gitea user"
+  []
+  (->
+   (user "git" :present {:system true :home "/home/git"})
+   (summary "gitea user")))
