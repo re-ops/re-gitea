@@ -11,18 +11,13 @@
    [re-conf.core :refer (invoke invoke-all report-n-exit assert-node-major-version)]
    [re-conf.resources.log :refer (info debug error)]))
 
-(defn elk
-  "Setting up only an egiteaserver instance"
+(defn gitea
+  "Setting up only an gitea instance"
   [env]
   (report-n-exit
    (invoke-all env
-      re-gitea.recipes.gitea
-      re-gitea.recipes.nginx)))
-
-(defn run-profile [env profile]
-  (fn [_]
-    (case (keyword profile)
-      :elk (elk env))))
+               re-gitea.recipes.gitea
+               re-gitea.recipes.nginx)))
 
 (defn -main [e profile & args]
   (assert-node-major-version)
@@ -30,9 +25,9 @@
     (take! (async/merge [(pkg/initialize) (fire/initialize)])
            (fn [_]
              (info "Provisioning machine using re-gitea!" ::main)
-             (run-profile env profile)))))
+             (gitea env)))))
 
-;; (set! *main-cli-fn* -main)
+(set! *main-cli-fn* -main)
 
 (comment
   (-main "resources/dev.edn" "elk"))
