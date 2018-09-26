@@ -34,8 +34,8 @@
    (summary "gitea user")))
 
 (defn gitea-service
-   "Setting up gitea service"
-   []
-   (->
-    (copy "resources/systemd/gitea.service" "/etc/systemd/system/")
-    (service "gitea" :enable)))
+  "Setting up gitea service"
+  []
+  (->
+   (copy "resources/systemd/gitea.service" "/etc/systemd/system/")
+   (service "gitea" :enable)))
