@@ -9,18 +9,17 @@
    [re-conf.resources.output :refer (summary)]
    [re-conf.resources.service :refer (service)]
    [re-conf.resources.firewall :refer (rule firewall)]
-   [re-conf.resources.pkg :refer (package)])
-  )
+   [re-conf.resources.pkg :refer (package)]))
 (defn reverse-proxy
   "Nginx revese proxy for Gitea"
   [{:keys [domain nginx] :as env}]
-  (let [available "/etc/nginx/sites-available/"
+  (let [available "/etc/nginx/sites-available"
         enabled "/etc/nginx/sites-enabled"
         input (assoc env :hostname (hostname))]
     (->
      (package "nginx")
      (template "resources/nginx/gitea.mustache" (<< "~{available}/gitea.conf") input)
-     (symlink (<< "~{enabled}/gitea.conf") (<< "~{available}/gitea.conf"))
+     (symlink (<< "~{enabled}/gitea.conf") (<< "~{available}/gitea.conf") :present)
      (summary "reverse proxy"))))
 
 (defn ssl
