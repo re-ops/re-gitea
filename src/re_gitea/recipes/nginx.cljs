@@ -10,6 +10,7 @@
    [re-conf.resources.service :refer (service)]
    [re-conf.resources.firewall :refer (rule firewall)]
    [re-conf.resources.pkg :refer (package)]))
+
 (defn reverse-proxy
   "Nginx revese proxy for Gitea"
   [{:keys [domain nginx] :as env}]
