@@ -20,7 +20,7 @@
     (->
      (package "nginx")
      (template "resources/nginx/gitea.mustache" (<< "~{available}/gitea.conf") input)
-     (symlink (<< "~{enabled}/gitea.conf") (<< "~{available}/gitea.conf") :present)
+     (symlink (<< "~{available}/gitea.conf") (<< "~{enabled}/gitea.conf") :present)
      (summary "reverse proxy"))))
 
 (defn ssl
