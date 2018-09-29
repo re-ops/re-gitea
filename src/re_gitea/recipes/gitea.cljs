@@ -37,5 +37,6 @@
   "Setting up gitea service"
   []
   (->
-   (copy "resources/systemd/gitea.service" "/etc/systemd/system/")
-   (service "gitea" :enable)))
+   (copy "resources/systemd/gitea.service" "/etc/systemd/system/gitea.service")
+   (service "gitea" :enable)
+   (summary "gitea service")))
