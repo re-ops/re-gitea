@@ -7,7 +7,7 @@
    [re-conf.core :refer (apply*)]
    [re-conf.resources.pkg :refer (package)]
    [re-conf.resources.service :refer (service)]
-   [re-conf.resources.user :refer (user)]
+   [re-conf.resources.user :refer (user group)]
    [re-conf.resources.file :refer (copy chmod chown directory)]
    [re-conf.resources.download :refer (download)]))
 
@@ -26,6 +26,7 @@
      (directory etc :present)
      (apply* directory (fn [f] (vector (<< "~{lib}~{f}"))) folders)
      (chmod bin "0777")
+     (group "git" :present)
      (user "git" :present {:system true :home "/home/git"})
      (chown etc "git" "git")
      (summary "gitea setup"))))
