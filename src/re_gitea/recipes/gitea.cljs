@@ -25,7 +25,7 @@
      (directory lib :present)
      (directory etc :present)
      (apply* directory (fn [f] (vector (<< "~{lib}~{f}"))) folders)
-     (chmod bin "777")
+     (chmod bin "0777")
      (user "git" :present {:system true :home "/home/git"})
      (chown etc "git" "git")
      (summary "gitea setup"))))
