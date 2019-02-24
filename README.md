@@ -16,16 +16,18 @@ $ lein npm install
 $ lein repl
 ```
 
-Using a second window:
+```clojure
+=> (require 'figwheel.main.api)
 
-```bash
-$ node target/js/compiled/main.js
+=> (figwheel.main.api/start {:mode :serve} "dev")
+
+=> (figwheel.main.api/cljs-repl "dev")
 ```
 
 In the VIM session:
 
 ```bash
-:Piggieback (figwheel-sidecar.repl-api/repl-env)
+:Piggieback (figwheel.main.api/repl-env "dev")
 ```
 
 # Copyright and license
