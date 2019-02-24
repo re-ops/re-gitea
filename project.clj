@@ -15,10 +15,6 @@
       [org.clojure/core.incubator "0.1.4"]
 
       [re-conf "0.4.4"]
-
-      ; build
-      [com.bhauman/figwheel-main "0.2.0"]
-      [com.bhauman/rebel-readline-cljs "0.1.4"]
    ]
 
    :npm {
@@ -36,8 +32,16 @@
 
   :plugins [[lein-cljfmt "0.5.7"]
             [lein-tag "0.1.0"]
-            [lein-npm "0.6.2"]]
+            [lein-npm "0.6.2"]
+            [cider/cider-nrepl "0.18.0"] ]
 
+  :profiles  {:dev
+      {:dependencies  [[org.clojure/clojurescript "1.10.339"]
+                       [com.bhauman/figwheel-main "0.2.0"]
+                       [cider/piggieback "0.3.8"]]
+        :resource-paths  ["target"]
+            :clean-targets ^{:protect false}  ["target"]
+            :repl-options  {:nrepl-middleware  [cider.piggieback/wrap-cljs-repl]}}}
 
   :source-paths ["src" "target"]
 
@@ -46,9 +50,8 @@
   :aliases {
      "travis" [
        "do" "clean," "cljfmt" "check," "npm" "install," "cljsbuild" "once" "prod," "cljsbuild" "test" ]
-     "fig"  [
-          "trampoline" "run" "-m" "figwheel.main"]
-          "build-dev"  ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
+
+     "fig" ["trampoline" "run" "-m" "figwheel.main"]
   }
 
 )

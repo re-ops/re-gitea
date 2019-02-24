@@ -1,0 +1,4 @@
+{:main re-gitea.recipes.main
+ :output-to main.js
+ :target :nodejs
+ }
