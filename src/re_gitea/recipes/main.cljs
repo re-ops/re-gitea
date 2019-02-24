@@ -15,11 +15,9 @@
   "Setting up only an gitea instance"
   [env]
   (report-n-exit
-   (invoke-all env
-               re-gitea.recipes.gitea
-               re-gitea.recipes.nginx)))
+   (invoke-all env [re-gitea.recipes.gitea re-gitea.recipes.nginx])))
 
-(defn -main [e profile & args]
+(defn -main [e & args]
   (assert-node-major-version)
   (let [env (if e (cljs.reader/read-string (io/slurp e)) {})]
     (take! (async/merge [(pkg/initialize) (fire/initialize)])
@@ -27,7 +25,10 @@
              (info "Provisioning machine using re-gitea!" ::main)
              (gitea env)))))
 
+(enable-console-print!)
+
 (set! *main-cli-fn* -main)
 
+(println 1)
 (comment
   (-main "resources/dev.edn" "elk"))
