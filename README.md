@@ -7,7 +7,7 @@ Re-gitea is a collection of recipes that use Re-conf for setting up the ELK stac
 # Development
 
 ```bash
-$ clj -A:rebel
+$ clj -A:prod
 ```
 
 ## VIM
@@ -19,7 +19,6 @@ $ deps -A:rebel
 user=> (require 'figwheel.main.api)
 user=> (figwheel.main.api/start {:mode :serve} "dev")
 user=> (figwheel.main.api/cljs-repl "dev")
-```
 
 In the VIM session:
 
@@ -29,7 +28,7 @@ In the VIM session:
 
 # Copyright and license
 
-Copyright [2018] [Ronen Narkis]
+Copyright [2019] [Ronen Narkis]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
