@@ -1,4 +1,6 @@
-{:main re-gitea.recipes.main
- :output-to main.js
- :target :nodejs
- }
+^{:figwheel-core false}
+{
+ :main re-gitea.recipes.main
+ :output-to "main.js"
+ :target :nodejs 
+}

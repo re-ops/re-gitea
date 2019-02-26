@@ -7,21 +7,18 @@ Re-gitea is a collection of recipes that use Re-conf for setting up the ELK stac
 # Development
 
 ```bash
-$ lein npm install
+$ clj -A:rebel
 ```
 
 ## VIM
 
+Start the repl:
+
 ```bash
-$ lein repl
-```
-
-```clojure
-=> (require 'figwheel.main.api)
-
-=> (figwheel.main.api/start {:mode :serve} "dev")
-
-=> (figwheel.main.api/cljs-repl "dev")
+$ deps -A:rebel
+user=> (require 'figwheel.main.api)
+user=> (figwheel.main.api/start {:mode :serve} "dev")
+user=> (figwheel.main.api/cljs-repl "dev")
 ```
 
 In the VIM session:
