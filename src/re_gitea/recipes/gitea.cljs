@@ -14,7 +14,7 @@
 (defn gitea
   "Installing gitea"
   []
-  (let [url "https://dl.gitea.io/gitea/1.5.0/gitea-1.5.0-linux-amd64"
+  (let [url "https://dl.gitea.io/gitea/1.7.0/gitea-1.7.0-linux-amd64"
         bin "/usr/local/bin/gitea"
         etc "/etc/gitea"
         lib "/var/lib/gitea/"
@@ -25,7 +25,7 @@
      (directory lib :present)
      (directory etc :present)
      (apply* directory (fn [f] (vector (<< "~{lib}~{f}"))) folders)
-     (chmod bin "0777")
+     (chmod bin "+x")
      (group "git" :present)
      (user "git" :present {:system true :home "/home/git"})
      (chown etc "git" "git")
